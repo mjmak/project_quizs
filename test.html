@@ -1,0 +1,65 @@
+<html>
+<body>
+<head>
+<link href="quiz.css" rel="stylesheet" type="text/css" >
+
+
+</head>
+ <h1>Quiz on Important Facts</h1>
+ <div id="basicUsage">00:00:00</div>
+ <br>
+ <p id ="CompleteTimeime">  <p/>
+<div class="quiz_container">
+  <div id="quiz"></div>
+</div>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<button id="submit" onclick="return load();">Restart Quiz</button>
+<div id="results"></div>
+
+<script type="text/javascript" src="quiz1.js"></script>
+<script>
+
+var count = 0; 
+var clearTime;
+ var seconds = 0, minutes = 0, hours = 0; 
+ var clearState; 
+ var secs, mins, gethours ; 
+ 
+ function startWatch( ) { 
+ if ( seconds === 60 ) { 
+ seconds = 0; minutes = minutes + 1; 
+ }
+ mins = ( minutes < 10 ) ? ( '0' + minutes + ': ' ) : ( minutes + ': ' ); 
+ if ( minutes === 60 ) {
+ minutes = 0; hours = hours + 1; 
+ } 
+ gethours = ( hours < 10 ) ? ( '0' + hours + ': ' ) : ( hours + ': ' ); 
+ secs = ( seconds < 10 ) ? ( '0' + seconds ) : ( seconds ); 
+var x = document .getElementById("basicUsage"); x.innerHTML = 'Time: ' + gethours + mins + secs; 
+ seconds++; 
+ clearTime = setTimeout( "startWatch( )", 1000 ); 
+ } 
+startWatch();
+ 
+function stopTime( ) { 
+	if ( seconds !== 0 || minutes !== 0 || hours !== 0 ) {
+		 var fulltime = document .getElementById( "basicUsage" ); 
+		 var time = gethours + mins + secs; 
+		fulltime.innerHTML = 'Fulltime: ' + time; 
+		 seconds = 0; minutes = 0; hours = 0; 
+		 secs = '0' + seconds; mins = '0' + minutes + ': '; gethours = '0' + hours + ': '; 
+		 var x = document.getElementById ("basicUsage"); 
+		 var stopTime = gethours + mins + secs; 
+		 x.innerHTML = stopTime; 
+		 document.getElementById('CompleteTimeime').innerHTML="complete Time in "+"  "+time;
+		clearTimeout( clearTime ); 
+	}
+} 
+ window.addEventListener( 'load', function ( ) { var stop = document.getElementById ("submit"); stop.addEventListener( 'click', stopTime ); }); 
+ 
+ 
+ 
+</script>
+</body>
+</html>
